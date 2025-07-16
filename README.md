@@ -40,33 +40,13 @@ mv todo-cli /usr/local/bin/
 
 ---
 
-## Database Setup
-
-This project uses SQLite with [sqlc](https://sqlc.dev/) for type-safe SQL code generation and [golang-migrate](https://github.com/golang-migrate/migrate) for database migrations.
-
-### Prerequisites
-
-Install the required tool:
-
-```sh
-# Install golang-migrate
-go install -tags 'sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
-```
-
-### Setup Database
-
-```sh
-# Create and migrate the database
-migrate -path migrations -database "sqlite3://todo.db" up
-```
-
-### Database Configuration
+## Database Configuration
 
 - **Default**: Uses `todo.db` SQLite file in the current directory
 - **Custom location**: Set the `DB_URL` environment variable
 
 ```sh
-export DB_URL="sqlite3://path/to/your/database.db"
+export DB_URL="path/to/your/database.db"
 ```
 
 ---
@@ -159,6 +139,14 @@ todo-cli list --help
 ## Credits
 
 Built with [Cobra](https://github.com/spf13/cobra) and Go.
+
+This project uses SQLite with [sqlc](https://sqlc.dev/) for type-safe SQL code generation and [golang-migrate](https://github.com/golang-migrate/migrate) for database migrations.
+
+To display human readable time, the project use the [timediff](https://github.com/mergestat/timediff) package.
+
+The package [godotenv](github.com/joho/godotenv) is also used to load environment variable.
+
+The SQLite driver is [modernc/sqlite](https://pkg.go.dev/modernc.org/sqlite)
 
 README co-written with AI using [VaultAI](https://app.vaultai.eu) (GPT-4.1) and [Cursor](https://www.cursor.com/) (claude-4-sonnet).
 
