@@ -4,7 +4,6 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"database/sql"
 	"log"
 	"todo-cli/internal/handler"
 	"todo-cli/internal/repository"
@@ -21,19 +20,15 @@ var listCmd = &cobra.Command{
 	Long:  `Displays the list of unfinished tasks. Use -a or --all to show all tasks, including completed ones.`,
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
-		ctx := cmd.Context()
-		db := ctx.Value(dbContextKey).(*sql.DB)
-		queries := repository.New(db)
-
 		var tasks []repository.Task
 		var err error
 		if allFlag {
-			tasks, err = queries.FindAllTasks(ctx)
+			tasks, err = app.Queries.FindAllTasks(cmd.Context())
 		} else {
-			tasks, err = queries.FindAllUnfinishedTasks(ctx)
+			tasks, err = app.Queries.FindAllUnfinishedTasks(cmd.Context())
 		}
 		if err != nil {
-			log.Fatal("Error while creating a new task:", err)
+			log.Fatal("Error while fetching tasks:", err)
 		}
 		handler.PrintTasks(tasks)
 	},

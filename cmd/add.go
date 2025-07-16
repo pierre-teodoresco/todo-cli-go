@@ -4,10 +4,8 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"database/sql"
 	"log"
 	"todo-cli/internal/handler"
-	"todo-cli/internal/repository"
 
 	"github.com/spf13/cobra"
 )
@@ -21,11 +19,7 @@ var addCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		title := args[0]
 
-		ctx := cmd.Context()
-		db := ctx.Value(dbContextKey).(*sql.DB)
-		queries := repository.New(db)
-
-		task, err := queries.NewTask(ctx, title)
+		task, err := app.Queries.NewTask(cmd.Context(), title)
 		if err != nil {
 			log.Fatal("Error while creating a new task:", err)
 		}

@@ -4,7 +4,6 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"database/sql"
 	"log"
 	"strconv"
 	"todo-cli/internal/handler"
@@ -35,18 +34,14 @@ Examples:
 			log.Fatal("Task ID should be a valid number:", err)
 		}
 
-		ctx := cmd.Context()
-		db := ctx.Value(dbContextKey).(*sql.DB)
-		queries := repository.New(db)
-
 		var task repository.Task
 		if !reverseFlag {
-			task, err = queries.CompleteTask(ctx, int64(id))
+			task, err = app.Queries.CompleteTask(cmd.Context(), int64(id))
 		} else {
-			task, err = queries.ReverseCompleteTask(ctx, int64(id))
+			task, err = app.Queries.ReverseCompleteTask(cmd.Context(), int64(id))
 		}
 		if err != nil {
-			log.Fatal("Error while creating a new task:", err)
+			log.Fatal("Error while updating task:", err)
 		}
 		handler.PrintCompletedTask(task)
 	},
