@@ -4,6 +4,12 @@ A simple and efficient command-line todo application written in Go.
 
 ---
 
+## Inspiration
+
+This project is taken from the [project ideas to learn golang](https://github.com/dreamsofcode-io/goprojects) presented by the youtube channel [DreamsOfCode](https://youtube.com/@dreamsofcode).
+
+---
+
 ## Features
 
 - **Add** new tasks to your todo list
