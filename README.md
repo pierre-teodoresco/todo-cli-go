@@ -6,7 +6,9 @@ A simple and efficient command-line todo application written in Go.
 
 ## Inspiration
 
-This project is taken from the [project ideas to learn golang](https://github.com/dreamsofcode-io/goprojects) presented by the youtube channel [DreamsOfCode](https://youtube.com/@dreamsofcode).
+This project was inspired by the [Go Projects](https://github.com/dreamsofcode-io/goprojects) repository, which features a collection of practical project ideas for learning Go. The idea for this command-line todo application comes from the [DreamsOfCode](https://youtube.com/@dreamsofcode) YouTube channel, which provides clear and motivating tutorials for Go developers.
+
+If you’re looking to improve your Go skills through hands-on projects, be sure to check out his content!
 
 ---
 
