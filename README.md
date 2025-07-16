@@ -32,6 +32,37 @@ mv todo-cli /usr/local/bin/
 
 ---
 
+## Database Setup
+
+This project uses SQLite with [sqlc](https://sqlc.dev/) for type-safe SQL code generation and [golang-migrate](https://github.com/golang-migrate/migrate) for database migrations.
+
+### Prerequisites
+
+Install the required tool:
+
+```sh
+# Install golang-migrate
+go install -tags 'sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+```
+
+### Setup Database
+
+```sh
+# Create and migrate the database
+migrate -path migrations -database "sqlite3://todo.db" up
+```
+
+### Database Configuration
+
+- **Default**: Uses `todo.db` SQLite file in the current directory
+- **Custom location**: Set the `DB_URL` environment variable
+
+```sh
+export DB_URL="sqlite3://path/to/your/database.db"
+```
+
+---
+
 ## Usage
 
 All commands are available via the `todo-cli` executable.
@@ -41,6 +72,7 @@ All commands are available via the `todo-cli` executable.
 ```sh
 todo-cli add "Buy groceries"
 ```
+
 _Adds a new task with the title "Buy groceries"._
 
 ---
@@ -50,6 +82,7 @@ _Adds a new task with the title "Buy groceries"._
 ```sh
 todo-cli list
 ```
+
 _Lists all unfinished tasks._
 
 ```sh
@@ -57,6 +90,7 @@ todo-cli list --all
 # or
 todo-cli list -a
 ```
+
 _Lists all tasks, including completed ones._
 
 ---
@@ -66,6 +100,7 @@ _Lists all tasks, including completed ones._
 ```sh
 todo-cli complete 3
 ```
+
 _Marks the task with ID 3 as completed._
 
 ```sh
@@ -73,6 +108,7 @@ todo-cli complete 3 --reverse
 # or
 todo-cli complete 3 -r
 ```
+
 _Marks the task with ID 3 as unfinished (undo completion)._
 
 ---
@@ -82,6 +118,7 @@ _Marks the task with ID 3 as unfinished (undo completion)._
 ```sh
 todo-cli delete 5
 ```
+
 _Deletes the task with ID 5 from your todo list._
 
 ---
@@ -111,25 +148,18 @@ todo-cli list --help
 
 ---
 
-## Configuration
-
-- Uses an SQLite database by default.
-- Set the database location with the `DB_URL` environment variable.
-
----
-
 ## Credits
 
 Built with [Cobra](https://github.com/spf13/cobra) and Go.
 
-AI Generated README using [VaultAI](https://app.vaultai.eu) (GPT-4.1).
+README co-written with AI using [VaultAI](https://app.vaultai.eu) (GPT-4.1) and [Cursor](https://www.cursor.com/) (claude-4-sonnet).
 
 ---
 
 ## Author
 
-* Pierre Teodoresco
+- Pierre Teodoresco
 
 ---
 
-*Happy productivity!*
+_Happy productivity!_
