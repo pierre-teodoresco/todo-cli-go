@@ -142,9 +142,9 @@ Built with [Cobra](https://github.com/spf13/cobra) and Go.
 
 This project uses SQLite with [sqlc](https://sqlc.dev/) for type-safe SQL code generation and [golang-migrate](https://github.com/golang-migrate/migrate) for database migrations.
 
-To display human readable time, the project use the [timediff](https://github.com/mergestat/timediff) package.
+To display human readable time, the project uses the [timediff](https://github.com/mergestat/timediff) package.
 
-The package [godotenv](github.com/joho/godotenv) is also used to load environment variable.
+The environment variables loading is provided by the [godotenv](github.com/joho/godotenv) package.
 
 The SQLite driver is [modernc/sqlite](https://pkg.go.dev/modernc.org/sqlite)
 
