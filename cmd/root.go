@@ -7,8 +7,8 @@ import (
 	"os"
 	"todo-cli/internal/repository"
 
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/cobra"
+	_ "modernc.org/sqlite"
 )
 
 // App holds application dependencies
@@ -32,7 +32,7 @@ func getDBPath() string {
 func initApp() (*App, error) {
 	dbPath := getDBPath()
 
-	db, err := sql.Open("sqlite3", dbPath)
+	db, err := sql.Open("sqlite", dbPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open database: %w", err)
 	}
@@ -41,6 +41,11 @@ func initApp() (*App, error) {
 	if err := db.Ping(); err != nil {
 		db.Close()
 		return nil, fmt.Errorf("failed to ping database: %w", err)
+	}
+
+	// Run migrations
+	if err := repository.RunMigrations(db); err != nil {
+		return nil, fmt.Errorf("migration error: %v", err)
 	}
 
 	queries := repository.New(db)
@@ -69,7 +74,7 @@ This CLI tool is built with Cobra, a powerful Go library for creating modern com
 			var err error
 			app, err = initApp()
 			if err != nil {
-				log.Fatal("Failed to initialize application:", err)
+				log.Fatal("Failed to initialize application: ", err)
 			}
 		}
 	},
