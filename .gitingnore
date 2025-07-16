@@ -1,5 +1,0 @@
-go.sum
-.env
-*.db
-todo-cli
-.DS_Store
